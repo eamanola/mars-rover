@@ -43,7 +43,7 @@ const turnLeft = (direction) => {
   return directions[newIndex];
 };
 
-const applyInstruction = (position, instruction, plateauSize) => {
+const applyInstruction = (position, instruction, size) => {
   let newPosition;
 
   switch (instruction) {
@@ -54,7 +54,7 @@ const applyInstruction = (position, instruction, plateauSize) => {
       newPosition = { ...position, direction: turnRight(position.direction) };
       break;
     case 'M':
-      newPosition = move(position, plateauSize);
+      newPosition = move(position, size);
       break;
     default:
       newPosition = null;
