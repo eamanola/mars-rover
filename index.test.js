@@ -51,14 +51,9 @@ describe('#input parsers: to parse and validate user inputs', () => {
         expect(app.parsePlateauSize(null)).toBeNull();
       });
 
-      test('can contain only positive integers and spaces', () => {
-        expect(app.parsePlateauSize('0 a')).toBeNull();
-        expect(app.parsePlateauSize('0, 0')).toBeNull();
-        expect(app.parsePlateauSize('0 -1')).toBeNull();
-      });
-
-      test('should contain 2 numbers', () => {
+      test('should contain 2 space separated numbers', () => {
         expect(app.parsePlateauSize('0')).toBeNull();
+        expect(app.parsePlateauSize('00')).toBeNull();
         expect(app.parsePlateauSize('0 0 0')).toBeNull();
       });
     });
@@ -89,6 +84,7 @@ describe('#input parsers: to parse and validate user inputs', () => {
         expect(app.parsePosition('0 0')).toBeNull();
         expect(app.parsePosition('0 0 N')).not.toBeNull();
         expect(app.parsePosition('0 0 N N')).toBeNull();
+        expect(app.parsePosition('00N')).toBeNull();
       });
 
       test('1st and 2nd part should be numbers', () => {

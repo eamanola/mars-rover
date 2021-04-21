@@ -68,16 +68,14 @@ const parsePlateauSize = (input) => {
     return null;
   }
 
-  if (!/^[0-9 ]+$/.test(input)) {
+  const match = input.match(/^\s*(\d+) (\d+)\s*$/);
+  if (!match) {
     return null;
   }
 
-  const parts = input.split(' ');
-  if (parts.length !== 2) {
-    return null;
-  }
+  const [, width, height] = match;
 
-  return { width: Number(parts[0]), height: Number(parts[1]) };
+  return { width: Number(width), height: Number(height) };
 };
 
 const parsePosition = (input) => {
@@ -85,24 +83,14 @@ const parsePosition = (input) => {
     return null;
   }
 
-  if (!/^[0-9 NSWE]+$/.test(input)) {
+  const match = input.match(/^\s*(\d+) (\d+) ([NSEW])\s*$/);
+  if (!match) {
     return null;
   }
 
-  const parts = input.split(' ');
-  if (parts.length !== 3) {
-    return null;
-  }
+  const [, x, y, direction] = match;
 
-  if (
-    Number.isNaN(parts[0])
-    || Number.isNaN(parts[1])
-    || directions.indexOf(parts[2]) === -1
-  ) {
-    return null;
-  }
-
-  return { x: Number(parts[0]), y: Number(parts[1]), direction: parts[2] };
+  return { x: Number(x), y: Number(y), direction };
 };
 
 const parseInstructions = (input) => {
